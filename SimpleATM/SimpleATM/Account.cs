@@ -6,6 +6,8 @@ namespace SimpleATM
 {
     static class Account
     {
-        static public Dictionary<User, int> account = new Dictionary<User,int>();
+        //static public Dictionary<User, int> account = new Dictionary<User,int>();
+        static public Dictionary<int, User> account = new Dictionary<int, User>();
+
     }
 }
