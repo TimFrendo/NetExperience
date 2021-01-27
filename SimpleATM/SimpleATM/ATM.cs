@@ -6,15 +6,8 @@ namespace SimpleATM
 {
     class ATM
     {
-        readonly User user;
-        int balance;
-        static int ID = 42680000;
-        
-        /*public ATM(User user)
-        {
-            this.user = user;
-            balance = Account.account[user];
-        }*/
+
+        List<int> cardNumber = new List<int>();
 
         /*public void CreateUser(string name, string secondName, int password)
         {
@@ -37,33 +30,29 @@ namespace SimpleATM
             }
         }*/
 
-        public void SignIn(int ID, int password)
+        public bool SignIn(int CardNo, int PIN)
         {
-            if (!DB.account.ContainsKey(ID))
-            {
-                Console.WriteLine("User not is Base");
-            }
-
-            if (DB.account[ID].Password == password)
-            {
-                Console.WriteLine("Accepted");
-            }
-            else
-            {
-                Console.WriteLine("password not correctly");
-            }
+            if (!DB.users.ContainsKey(CardNo))
+                return false;
+            else if (DB.users[CardNo].PIN != PIN)
+                return false;
+            cardNumber.Add(CardNo);
+            return true;
         }
 
         public void PutMoney(int money)
         {
-            balance += money;
+            if (money > 0 && cardNumber.Count > 0)
+                DB.balance[cardNumber[0]] += money;
+            else
+                Console.WriteLine("введите положительное число");
         }
 
         public void WithdrawMoney(int money)
         {
-            if(money <= balance)
+            if(money <= DB.balance[cardNumber[0]] && cardNumber.Count > 0)
             {
-                balance -= money;
+                DB.balance[cardNumber[0]] -= money;
             }
             else
                 Console.WriteLine("У Вас недостаточно средст на счете");
@@ -71,7 +60,16 @@ namespace SimpleATM
 
         public int GetBalance()
         {
-            return balance;
+            if(cardNumber.Count > 0)
+                return DB.balance[cardNumber[0]];
+            Console.WriteLine("Enter the Card");
+            return -1;
+        }
+
+        public bool Exit()
+        {
+            cardNumber.Clear();
+            return true;
         }
 
         
