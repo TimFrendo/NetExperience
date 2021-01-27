@@ -8,9 +8,8 @@ namespace SimpleATM
     {
         public string Name { get; set; }
         public string SecondName { get; set; }
-        public int ID { get; set; }
-        public int Password { get; set; }
-                
+        //public int ID { get; set; }
+        //public int Password { get; set; }                
  
     }
 }

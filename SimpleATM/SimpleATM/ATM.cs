@@ -16,7 +16,7 @@ namespace SimpleATM
             balance = Account.account[user];
         }*/
 
-        public void CreateUser(string name, string secondName, int password)
+        /*public void CreateUser(string name, string secondName, int password)
         {
             User newUser = new User();
             newUser.Name = name;
@@ -26,24 +26,25 @@ namespace SimpleATM
             PutBase(newUser, ID);
             Console.WriteLine($"You ID: {0} and password{1}", newUser.ID, newUser.Password);
             ID++;
-        }
+        }*/
 
-        void PutBase(User newUser, int ID)
+        /*void PutBase(User newUser, int ID)
         {
             if (!Account.account.ContainsKey(ID))
             {
                 Account.account.Add(ID, newUser);
                 //return true;
             }
-        }
+        }*/
+
         public void SignIn(int ID, int password)
         {
-            if (!Account.account.ContainsKey(ID))
+            if (!DB.account.ContainsKey(ID))
             {
                 Console.WriteLine("User not is Base");
             }
 
-            if (Account.account[ID].Password == password)
+            if (DB.account[ID].Password == password)
             {
                 Console.WriteLine("Accepted");
             }
